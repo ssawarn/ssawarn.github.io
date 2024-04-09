@@ -1,24 +1,24 @@
 {
   "basics": {
-    "name": "Albert Einstein",
-    "label": "Scientist",
+    "name": "Shivam Sawarn",
+    "label": "Project Associate",
     "image": "",
-    "email": "albert@einstein.de",
-    "phone": "(912) 123-4567",
-    "url": "https://alshedivat.github.io/al-folio/",
-    "summary": "A German-born theoretical physicist, widely ranked among the greatest and most influential scientists of all time",
+    "email": "stoicishiv@hotmail.com",
+    "phone": "(91) 7482816618",
+    "url": "https://ssawarn.github.io",
+    "summary": "Project Associate at PRL. I am interested in Quantum Key Distribution with experimental interest in realizing Quantum Networks protocols.",
     "location": {
-      "address": "2712 Broadway St",
-      "postalCode": "CA 94115",
-      "city": "San Francisco",
-      "countryCode": "US",
-      "region": "California"
+      "address": "Sikariya",
+      "postalCode": "Babhana",
+      "city": "Jehanabad",
+      "countryCode": "IN",
+      "region": "Bihar"
     },
     "profiles": [
       {
-        "network": "Twitter",
-        "username": "AlbertEinstein",
-        "url": "https://twitter.com/AlbertEinstein"
+        "network": "",
+        "username": "",
+        "url": ""
       }
     ]
   },

@@ -1,5 +1,11 @@
-Write your biography here. Tell the world about yourself. Link to your favorite [subreddit](http://reddit.com). You can put a picture in, too. The code is already in, just name your picture `prof_pic.jpg` and put it in the `img/` folder.
 
-Put your address / P.O. box / other info right below your picture. You can also disable any these elements by editing `profile` property of the YAML header of your `_pages/about.md`. Edit `_bibliography/papers.bib` and Jekyll will render your [publications page](/al-folio/publications/) automatically.
 
-Link to your social media connections, too. This theme is set up to use [Font Awesome icons](https://fontawesome.com/) and [Academicons](https://jpswalsh.github.io/academicons/), like the ones below. Add your Facebook, Twitter, LinkedIn, Google Scholar, or just disable all of them.
+* I am a project associate in the Quantum and Science Technology lab at the Physical Research Laboratory.
+
+* My research interests lie in Quantum Information Theory and Quantum Computing with experimental interest in realizing Quantum Key Distribution protocols…
+
+* I received my MSc Physics from Delhi University and Bachelor’s Degree in Physics at Jamia Millia Islamia.
+
+* I’m from Bihar, India and currently live in New Delhi.
+
+* For more details, check out my [CV](/al-folio/)
