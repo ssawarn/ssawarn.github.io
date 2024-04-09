@@ -8,4 +8,21 @@ categories: Computational
 disqus_comments: false
 ---
 
-<iframe width='1000' height='8400' src='https://www.wolframcloud.com/obj/f5881fb8-9709-45c0-98c6-db32cdecbca4' frameborder='0'></iframe>
+<script crossorigin src="https://unpkg.com/wolfram-notebook-embedder@0.3/dist/wolfram-notebook-embedder.min.js"></script><div id="WNE-div-d2a6bd60-857a-4d4e-988b-86e7669baadf"></div><script>WolframNotebookEmbedder.embed("https://www.wolframcloud.com/obj/f5881fb8-9709-45c0-98c6-db32cdecbca4",document.getElementById("WNE-div-d2a6bd60-857a-4d4e-988b-86e7669baadf"));</script>
+
+
+<script src="https://giscus.app/client.js"
+        data-repo="ssawarn/ssawarn.github.io"
+        data-repo-id="R_kgDOLrNstQ"
+        data-category="General"
+        data-category-id="DIC_kwDOLrNstc4CekFi"
+        data-mapping="pathname"
+        data-strict="0"
+        data-reactions-enabled="1"
+        data-emit-metadata="0"
+        data-input-position="bottom"
+        data-theme="preferred_color_scheme"
+        data-lang="en"
+        crossorigin="anonymous"
+        async>
+</script>
