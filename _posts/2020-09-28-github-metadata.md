@@ -6,6 +6,7 @@ description: This computational essay is about the CHSH game, a notable scenario
 tags: Quantum CHSH Computational
 categories: Computational
 featured: true
+thumbnail: assets/img/chsh.png
 giscus_comments: true
 ---
 
