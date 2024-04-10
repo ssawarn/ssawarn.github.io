@@ -1,9 +1,8 @@
 ---
 layout: about
-title: about
+title: About
 permalink: /
-subtitle: <a href='#'>Project Associate </a>at Physical Research Laboratory
-
+subtitle: Project Associate at <a href="https://www.prl.res.in/prl-eng/">PRL</a>
 profile:
   align: right
   image: prof_pic.jpg
@@ -15,6 +14,8 @@ selected_papers: false # includes a list of papers marked as "selected={true}"
 social: true # includes social icons at the bottom of the page
 ---
 
+---
+
 * I am a Project Associate at Quantum and Science Technology lab in the Physical Research Laboratory.
 
 * My research interests lie in Quantum Key Distribution with experimental interest in realizing Quantum Networking protocols.
@@ -23,4 +24,4 @@ social: true # includes social icons at the bottom of the page
 
 * I’m from Bihar, India and currently live in Ahmedabad.
 
-* For more details, check out my [CV](https://ssawarn.github.io/assets/pdf/2023_SIP_Shivam.pdf)
+* For more details, check out my [CV](https://ssawarn.github.io/assets/pdf/resume_13_04.pdf)

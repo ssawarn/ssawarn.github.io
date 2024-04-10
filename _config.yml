@@ -294,8 +294,8 @@ display_categories: ["Computational"] # these categories will be displayed on th
 # -----------------------------------------------------------------------------
 
 scholar:
-  last_name: [Einstein]
-  first_name: [Albert, A.]
+  last_name: [Sawarn]
+  first_name: [Shivam]
 
   style: apa
   locale: en

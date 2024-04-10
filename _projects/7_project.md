@@ -5,7 +5,7 @@ description: Wolfram India School 2022
 img: assets/img/india_school.png
 start_date: 2021-12-28
 end_date: 2022-02-12
-importance: 3
+importance: 4
 category: Research
 giscus_comments: true
 ---
