@@ -8,10 +8,7 @@ profile:
   align: right
   image: prof_pic.jpg
   image_circular: false # crops the image to make it circular
-  more_info: >
-    <p>5 Sikariya</p>
-    <p>Babhana Parasbigha</p>
-    <p>Jehanabad, Bihar 804417</p>
+  more_info: 
 
 news: true # includes a list of news items
 selected_papers: false # includes a list of papers marked as "selected={true}"
@@ -26,4 +23,4 @@ social: true # includes social icons at the bottom of the page
 
 * I’m from Bihar, India and currently live in Ahmedabad.
 
-* For more details, check out my [CV](/al-folio/)
+* For more details, check out my [CV](https://ssawarn.github.io/assets/pdf/2023_SIP_Shivam.pdf)

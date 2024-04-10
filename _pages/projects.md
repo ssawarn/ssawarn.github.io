@@ -1,11 +1,11 @@
 ---
 layout: page
-title: projects
+title: Experience
 permalink: /projects/
-description: A growing collection of your cool projects.
+description: A comprehensive look at my professional journey, showcasing my work and research experience. 
 nav: true
-nav_order: 3
-display_categories: [work, fun]
+nav_order: 1
+display_categories: [Work, Research]
 horizontal: false
 ---
 
