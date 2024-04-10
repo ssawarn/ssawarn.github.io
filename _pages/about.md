@@ -14,15 +14,15 @@ profile:
     <p>Jehanabad, Bihar 804417</p>
 
 news: true # includes a list of news items
-selected_papers: true # includes a list of papers marked as "selected={true}"
+selected_papers: false # includes a list of papers marked as "selected={true}"
 social: true # includes social icons at the bottom of the page
 ---
 
-* I am a project associate at Quantum and Science Technology lab in the Physical Research Laboratory.
+* I am a Project Associate at Quantum and Science Technology lab in the Physical Research Laboratory.
 
 * My research interests lie in Quantum Key Distribution with experimental interest in realizing Quantum Networking protocols.
 
-* I received my MSc Physics from Delhi University and Bachelor’s Degree in Physics at Jamia Millia Islamia.
+* I received my Masters' Degree in Physics from Delhi University and Bachelor’s Degree in Physics at Jamia Millia Islamia.
 
 * I’m from Bihar, India and currently live in Ahmedabad.
 
