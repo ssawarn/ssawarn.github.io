@@ -1,8 +1,8 @@
 ---
 layout: post
-title: 'CHSH Game: Illustrating the peculiar advantages of quantum strategies over classical ones'
+title: "CHSH Game: Illustrating the peculiar advantages of quantum strategies over classical ones"
 date: 2023-10-16 21:01:00
-description: This computational essay is about the CHSH game, a notable scenario within quantum mechanics, illustrating the peculiar advantages of quantum strategies over classical ones in particular computational contexts. 
+description: This computational essay is about the CHSH game, a notable scenario within quantum mechanics, illustrating the peculiar advantages of quantum strategies over classical ones in particular computational contexts.
 tags: Quantum CHSH Computational
 categories: Computational
 featured: true

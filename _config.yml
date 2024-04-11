@@ -4,24 +4,23 @@
 
 title: blank # the website title (if blank, full name will be used instead)
 first_name: Shivam
-middle_name: 
+middle_name:
 last_name: Sawarn
 email: stoicishiv@hotmail.com
 description: > # the ">" symbol means to ignore newlines until "footer_text:"
-  Project associate at PRL. 
+  Project associate at PRL.
 #footer_text: >
 #  Powered by <a href="https://jekyllrb.com/" target="_blank">Jekyll</a> with <a href="https://github.com/alshedivat/al-folio">al-folio</a> theme.
 #  Hosted by <a href="https://pages.github.com/" target="_blank">GitHub Pages</a>.
 #  Photos from <a href="https://unsplash.com" target="_blank">Unsplash</a>.
 keywords: # add your own keywords or leave empty
 lang: en # the language of your site (for example: en, fr, cn, ru, etc.)
-icon: favicon.ico  # the emoji used as the favicon (alternatively, provide image name in /assets/img/)
+icon: favicon.ico # the emoji used as the favicon (alternatively, provide image name in /assets/img/)
 icon16: favicon-16x16.png
 icon32: favicon-32x32.png
 icon_apple: apple-touch-icon.png
 icon_safari_pinned: safari-pinned-tab.svg
 icon_android: android-chrome-192x192.png
-
 
 url: https://ssawarn.github.io # the base hostname & protocol for your site
 baseurl: #/al-folio # the subpath of your site, e.g. /blog/. Leave blank for root
@@ -167,8 +166,8 @@ disqus_shortname: al-folio # put your disqus shortname
 # If you have blog posts published on medium.com or other external sources,
 # you can display them in your blog by adding a link to the RSS feed.
 #external_sources:
- # - name: quantumgrad.com
-  # rss_url: https://www.quantumgrad.com/article/2
+# - name: quantumgrad.com
+# rss_url: https://www.quantumgrad.com/article/2
 
 #external_sources:
 #  - name: medium.com
@@ -332,7 +331,26 @@ enable_publication_badges:
 
 # Filter out certain bibtex entry keywords used internally from the bib output
 filtered_bibtex_keywords:
-  [abbr, abstract, altmetric, arxiv, award, award_name, bibtex_show, blog, code, html, pdf, poster, preview, selected, slides, supp, video, website]
+  [
+    abbr,
+    abstract,
+    altmetric,
+    arxiv,
+    award,
+    award_name,
+    bibtex_show,
+    blog,
+    code,
+    html,
+    pdf,
+    poster,
+    preview,
+    selected,
+    slides,
+    supp,
+    video,
+    website,
+  ]
 
 # Maximum number of authors to be shown for each publication (more authors are visible on click)
 max_author_limit: 3 # leave blank to always show all authors

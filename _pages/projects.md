@@ -2,7 +2,7 @@
 layout: page
 title: Experience
 permalink: /projects/
-description: A comprehensive look at my professional journey, showcasing my work and research experience. 
+description: A comprehensive look at my professional journey, showcasing my work and research experience.
 nav: true
 nav_order: 1
 display_categories: [Work, Research]

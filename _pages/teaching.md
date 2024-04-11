@@ -6,6 +6,7 @@ description: Sharing knowledge and fostering growth through passionate and effec
 nav: true
 nav_order: 6
 ---
+
 <h2> Wolfram Research </h2>
 * [Wolfram Summer School 2023](https://education.wolfram.com/summer-school/faculty/2023/#shivam-sawarn)
     * Responsible to guide four students from Physics track and assisting them in
@@ -22,11 +23,10 @@ nav_order: 6
 * [Wolfram Summer School 2022](https://education.wolfram.com/summer-school/faculty/2022/#shivam-sawarn)
     * Aided 20+ students in coding for projects proposed during the school as Teaching Assistant.
 
-
-------
+---
 
 <h2> IBM Qiskit </h2>
 
-* Quantum Global Summer School 2023
-* IBM Quantum Challenge Spring’23
-* IBM Quantum Challenge Fall’22
+- Quantum Global Summer School 2023
+- IBM Quantum Challenge Spring’23
+- IBM Quantum Challenge Fall’22
