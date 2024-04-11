@@ -10,7 +10,7 @@ category: Research
 giscus_comments: true
 ---
 
-- Attended 3 weeks school and completed the [project](https://www.notebookarchive.org/predicting-the-electron-invariant-mass-from-the-cern-dielectron-collision-data--2022-01-5kbhz3u/) under [Julián Laverde](https://www.linkedin.com/in/julián-laverde-a370311b1/).
+- Attended 3 weeks school and completed the [project](https://www.notebookarchive.org/predicting-the-electron-invariant-mass-from-the-cern-dielectron-collision-data--2022-01-5kbhz3u/) under Julián Laverde.
 
 - Explored various features of the di-electron collision using rigorous data analysis tools on a dataset consisting 100,000 dielectron events in the mass range 2-110 GeV.
 
