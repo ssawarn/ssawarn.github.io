@@ -9,7 +9,7 @@ category: Research
 giscus_comments: false
 ---
 
-[[Weblink]](https://www.wolfram.com/events/virtual-conference-south-asia/2023/schedule/) [[Presentation]](https://www.bigmarker.com/wolfram-u/south-asia-conference-2023?bmid=3f8fc05963c1&amp;source_from=invitation) [[Code]](https://community.wolfram.com/groups/-/m/t/2913983)
+[[Code]](https://community.wolfram.com/groups/-/m/t/2913983) [[Presentation]](https://www.bigmarker.com/wolfram-u/south-asia-conference-2023?bmid=3f8fc05963c1&amp;source_from=invitation) 
 
 # Abstract
 
