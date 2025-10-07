@@ -2,7 +2,7 @@
 layout: about
 title: About
 permalink: /
-subtitle: Doctoral student at <a href="https://www.uibk.ac.at/en/exphys/research/quantum-interfaces/">QIG</a>
+subtitle: Doctoral student in <a href="https://www.uibk.ac.at/en/exphys/research/quantum-interfaces/">QIG</a>, Innsbuck
 profile:
   align: right
   image: prof_pic.jpg

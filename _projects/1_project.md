@@ -1,7 +1,7 @@
 ---
 layout: page
 title: Free-space Quantum Communication
-description: Work as project associate at PRL
+description: Research intern at PRL
 img: assets/img/prl_lab.JPG
 start_date: 2023-05-15
 end_date: 2024-03-31
