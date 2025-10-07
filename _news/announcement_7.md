@@ -5,4 +5,4 @@ inline: true
 related_posts: false
 ---
 
- Attended [Young Atom Optician Conference](https://yao.iqoqi.at/). Presented a poster titled 'Improving the Entanglement Fidelity for \(^{40}\mathrm{Ca}^{+}\) ion-cavity sytem'.
+ Attended [Young Atom Optician Conference](https://yao.iqoqi.at/). Presented a poster titled 'Improving the Entanglement Fidelity for <sup>40</sup>Ca<sup>+</sup> ion-cavity sytem'.
