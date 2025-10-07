@@ -5,4 +5,4 @@ inline: true
 related_posts: false
 ---
 
- Attended [IQOQI@20](https://20years.iqoqi.at/) conference. Presented a poster titled 'Ion-photon quantum interface based on trapped $^{40}Ca^+$ ions'.
+ Attended [IQOQI@20](https://20years.iqoqi.at/) conference. Presented a poster titled 'Ion-photon quantum interface based on trapped <sup>40</sup>Ca<sup>+</sup> ions'.
