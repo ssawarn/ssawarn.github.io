@@ -2,7 +2,7 @@
 layout: about
 title: About
 permalink: /
-subtitle: Project Associate at <a href="https://www.prl.res.in/prl-eng/">PRL</a>
+subtitle: Doctoral student at <a href="https://www.uibk.ac.at/en/exphys/research/quantum-interfaces/">QIG</a>
 profile:
   align: right
   image: prof_pic.jpg
@@ -16,12 +16,14 @@ social: true # includes social icons at the bottom of the page
 
 ---
 
-- I am a Project Associate at Quantum and Science Technology lab in the Physical Research Laboratory.
+- I am currently a doctoral student in the [Quantum Interfaces group](https://www.uibk.ac.at/en/exphys/research/quantum-interfaces/) at Universität Innsbruck.
 
-- My research interests are centered on Quantum Key Distribution, and I'm particularly excited about implementing Quantum Networking protocols in real-world scenarios.
+- My research focuses on the experimental demonstration of quantum network using <sup>40</sup>Ca<sup>+</sup> ion-cavity sytem.
 
-- My educational foundations are built on a Master's Degree in Physics from the [Hindu College](https://hinducollege.ac.in), preceded by a Bachelor’s Degree in Physics from [Jamia Millia Islamia](https://jmi.ac.in).
+- Previously, I was a research intern at the [Quantum and Science Technology lab](https://www.prl.res.in/~rpsingh/QSTProgram/index.html) at the Physical Research Laboratory.
 
-- Born and raised in Bihar, India, I have now made my home in the vibrant city of Ahmedabad.
+- I hold a Master's degree in Physics from [Hindu College](https://hinducollege.ac.in) and a Bachelor’s degree in Physics from [Jamia Millia Islamia](https://jmi.ac.in).
 
-- For a deeper look into my professional journey and accomplishments, please feel free to check out my [CV](https://ssawarn.github.io/assets/pdf/resume_13_04.pdf).
+- Born and raised in Bihar, India, I have journeyed from Patna to Delhi and now to Innsbruck.
+
+- For a deeper look into my professional journey, please feel free to check out my [CV](https://ssawarn.github.io/assets/pdf/resume_13_04.pdf).
