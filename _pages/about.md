@@ -26,4 +26,4 @@ social: true # includes social icons at the bottom of the page
 
 - Born and raised in Bihar, India, I have journeyed from Patna to Delhi and now to Innsbruck.
 
-- For a deeper look into my professional journey, please feel free to check out my [CV](https://ssawarn.github.io/assets/pdf/resume_13_04.pdf).
+- For a deeper look into my professional journey, please feel free to check out my [CV](https://ssawarn.github.io/assets/pdf/resume_10072025.pdf).
