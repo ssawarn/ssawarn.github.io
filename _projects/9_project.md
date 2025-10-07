@@ -1,8 +1,8 @@
 ---
 layout: page
-title: Simulation of <sup>40</sup>Ca<sup>+</sup>
+title: Simulation of <sup>40</sup>Ca<sup>+</sup> ion-cavity system
 description: simulation
-img: assets/img/scheme.JPG
+img: assets/img/scheme.png
 start_date: 2024-06-10
 end_date: 2025-06-09
 importance: 1
