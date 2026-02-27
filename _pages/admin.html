@@ -1,0 +1,569 @@
+---
+layout: none
+title: "·"
+permalink: /admin
+sitemap: false
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="robots" content="noindex, nofollow" />
+    <title>·</title>
+    <style>
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      :root {
+        --bg: #0d1117;
+        --surface: #161b22;
+        --surface2: #1c2128;
+        --border: #30363d;
+        --text: #c9d1d9;
+        --muted: #8b949e;
+        --accent: #58a6ff;
+        --green: #3fb950;
+        --red: #f85149;
+      }
+
+      body {
+        background: var(--bg);
+        color: var(--text);
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+        font-size: 14px;
+        line-height: 1.5;
+      }
+
+      /* ── Login ─────────────────────────────────────────────── */
+      #login-screen {
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 1rem;
+      }
+
+      .login-card {
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: 12px;
+        padding: 2.5rem 2rem;
+        width: 100%;
+        max-width: 360px;
+      }
+
+      .login-card h2 {
+        font-size: 1rem;
+        font-weight: 600;
+        margin-bottom: 1.5rem;
+        color: var(--muted);
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+      }
+
+      .login-card input[type="password"] {
+        width: 100%;
+        background: var(--bg);
+        border: 1px solid var(--border);
+        border-radius: 6px;
+        color: var(--text);
+        padding: 0.6rem 0.9rem;
+        font-size: 14px;
+        outline: none;
+        transition: border-color 0.15s;
+        margin-bottom: 0.9rem;
+        font-family: monospace;
+        letter-spacing: 0.05em;
+      }
+
+      .login-card input[type="password"]:focus {
+        border-color: var(--accent);
+      }
+
+      .btn-primary {
+        display: inline-block;
+        background: var(--accent);
+        color: #fff;
+        border: none;
+        border-radius: 6px;
+        padding: 0.55rem 1.1rem;
+        font-size: 14px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: opacity 0.15s;
+      }
+
+      .btn-primary:hover:not(:disabled) {
+        opacity: 0.85;
+      }
+
+      .btn-primary:disabled {
+        opacity: 0.55;
+        cursor: default;
+      }
+
+      .btn-primary.block {
+        width: 100%;
+        text-align: center;
+      }
+
+      .btn-ghost {
+        display: inline-block;
+        background: transparent;
+        color: var(--muted);
+        border: 1px solid var(--border);
+        border-radius: 6px;
+        padding: 0.45rem 0.9rem;
+        font-size: 13px;
+        cursor: pointer;
+        transition: color 0.15s, border-color 0.15s;
+      }
+
+      .btn-ghost:hover {
+        color: var(--text);
+        border-color: var(--muted);
+      }
+
+      #login-error {
+        color: var(--red);
+        font-size: 13px;
+        margin-top: 0.75rem;
+      }
+
+      .login-hint {
+        margin-top: 1.25rem;
+        font-size: 12px;
+        color: var(--muted);
+        border-top: 1px solid var(--border);
+        padding-top: 1rem;
+      }
+
+      .login-hint a {
+        color: var(--accent);
+        text-decoration: none;
+      }
+
+      .login-hint a:hover {
+        text-decoration: underline;
+      }
+
+      code {
+        background: var(--bg);
+        border: 1px solid var(--border);
+        border-radius: 3px;
+        padding: 0 4px;
+        font-size: 11px;
+      }
+
+      /* ── Admin panel ────────────────────────────────────────── */
+      #admin-panel {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 1.5rem 1.25rem 3rem;
+      }
+
+      .admin-header {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+        margin-bottom: 1.25rem;
+        flex-wrap: wrap;
+      }
+
+      .admin-header h1 {
+        font-size: 1.15rem;
+        font-weight: 600;
+        flex: 1;
+        min-width: 80px;
+      }
+
+      .toolbar {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+        margin-bottom: 1rem;
+        flex-wrap: wrap;
+      }
+
+      #search-input {
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: 6px;
+        color: var(--text);
+        padding: 0.45rem 0.9rem;
+        font-size: 13px;
+        outline: none;
+        width: 260px;
+        max-width: 100%;
+        transition: border-color 0.15s;
+      }
+
+      #search-input:focus {
+        border-color: var(--accent);
+      }
+
+      #contact-count {
+        color: var(--muted);
+        font-size: 13px;
+        margin-left: auto;
+        white-space: nowrap;
+      }
+
+      /* ── Table ──────────────────────────────────────────────── */
+      .table-wrap {
+        overflow-x: auto;
+        border: 1px solid var(--border);
+        border-radius: 8px;
+      }
+
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        min-width: 680px;
+      }
+
+      thead th {
+        background: var(--surface);
+        color: var(--muted);
+        font-size: 11px;
+        font-weight: 600;
+        letter-spacing: 0.07em;
+        text-transform: uppercase;
+        padding: 0.65rem 1rem;
+        text-align: left;
+        border-bottom: 1px solid var(--border);
+        white-space: nowrap;
+      }
+
+      tbody tr {
+        border-bottom: 1px solid var(--border);
+        transition: background 0.1s;
+      }
+
+      tbody tr:last-child {
+        border-bottom: none;
+      }
+
+      tbody tr:hover {
+        background: rgba(88, 166, 255, 0.05);
+      }
+
+      tbody td {
+        padding: 0.7rem 1rem;
+        vertical-align: middle;
+      }
+
+      tbody td a {
+        color: var(--accent);
+        text-decoration: none;
+      }
+
+      tbody td a:hover {
+        text-decoration: underline;
+      }
+
+      .td-date {
+        color: var(--muted);
+        font-size: 12px;
+        white-space: nowrap;
+        font-variant-numeric: tabular-nums;
+      }
+
+      .td-main strong {
+        font-weight: 600;
+      }
+
+      .td-notes {
+        color: var(--muted);
+        font-size: 13px;
+        max-width: 180px;
+      }
+
+      .td-actions {
+        white-space: nowrap;
+      }
+
+      .btn-edit,
+      .btn-del {
+        border-radius: 5px;
+        padding: 0.25rem 0.65rem;
+        font-size: 12px;
+        cursor: pointer;
+        background: transparent;
+        transition: background 0.15s;
+        margin-right: 0.3rem;
+      }
+
+      .btn-edit {
+        color: var(--accent);
+        border: 1px solid var(--accent);
+      }
+
+      .btn-edit:hover {
+        background: rgba(88, 166, 255, 0.1);
+      }
+
+      .btn-del {
+        color: var(--red);
+        border: 1px solid var(--red);
+      }
+
+      .btn-del:hover {
+        background: rgba(248, 81, 73, 0.1);
+      }
+
+      .empty-msg {
+        text-align: center;
+        padding: 2.5rem 1rem;
+        color: var(--muted);
+      }
+
+      /* ── Status bar ─────────────────────────────────────────── */
+      #status-bar {
+        margin-top: 0.75rem;
+        font-size: 12px;
+        color: var(--muted);
+        min-height: 18px;
+      }
+
+      .status-ok {
+        color: var(--green);
+      }
+
+      .status-error {
+        color: var(--red);
+      }
+
+      .status-info {
+        color: var(--muted);
+      }
+
+      /* ── Modal ──────────────────────────────────────────────── */
+      #contact-modal {
+        display: none;
+        position: fixed;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.7);
+        z-index: 1000;
+        align-items: center;
+        justify-content: center;
+        padding: 1rem;
+      }
+
+      .modal-card {
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: 12px;
+        padding: 2rem;
+        width: 100%;
+        max-width: 500px;
+        max-height: 90vh;
+        overflow-y: auto;
+      }
+
+      .modal-card h3 {
+        font-size: 1rem;
+        font-weight: 600;
+        margin-bottom: 1.25rem;
+      }
+
+      .form-row {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 0.75rem;
+      }
+
+      .form-group {
+        margin-bottom: 0.8rem;
+      }
+
+      .form-group label {
+        display: block;
+        font-size: 11px;
+        color: var(--muted);
+        margin-bottom: 0.3rem;
+        font-weight: 600;
+        letter-spacing: 0.05em;
+        text-transform: uppercase;
+      }
+
+      .form-group input,
+      .form-group textarea {
+        width: 100%;
+        background: var(--bg);
+        border: 1px solid var(--border);
+        border-radius: 6px;
+        color: var(--text);
+        padding: 0.5rem 0.75rem;
+        font-size: 13px;
+        outline: none;
+        font-family: inherit;
+        transition: border-color 0.15s;
+      }
+
+      .form-group textarea {
+        resize: vertical;
+        min-height: 72px;
+      }
+
+      .form-group input:focus,
+      .form-group textarea:focus {
+        border-color: var(--accent);
+      }
+
+      .modal-actions {
+        display: flex;
+        gap: 0.75rem;
+        justify-content: flex-end;
+        margin-top: 1.25rem;
+      }
+
+      /* ── Mobile ─────────────────────────────────────────────── */
+      @media (max-width: 600px) {
+        .form-row {
+          grid-template-columns: 1fr;
+        }
+
+        /* Hide less critical columns on small screens */
+        thead th:nth-child(3),
+        thead th:nth-child(4),
+        thead th:nth-child(6),
+        thead th:nth-child(7),
+        tbody td:nth-child(3),
+        tbody td:nth-child(4),
+        tbody td:nth-child(6),
+        tbody td:nth-child(7) {
+          display: none;
+        }
+
+        #search-input {
+          width: 100%;
+        }
+
+        #contact-count {
+          margin-left: 0;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- ── Login ─────────────────────────────────────────────── -->
+    <div id="login-screen">
+      <div class="login-card">
+        <h2>Internal</h2>
+        <input
+          type="password"
+          id="pat-input"
+          placeholder="Access key"
+          autocomplete="current-password"
+          autofocus
+        />
+        <button id="login-btn" class="btn-primary block">Enter</button>
+        <div id="login-error" style="display: none"></div>
+        <div class="login-hint">
+          Requires a
+          <a
+            href="https://github.com/settings/tokens/new?scopes=gist&description=ssawarn-contacts"
+            target="_blank"
+            rel="noopener"
+            >GitHub token</a
+          >
+          with <code>gist</code> scope. Data is stored in a private Gist — never
+          in the public repo.
+        </div>
+      </div>
+    </div>
+
+    <!-- ── Admin panel ──────────────────────────────────────── -->
+    <div id="admin-panel" style="display: none">
+      <div class="admin-header">
+        <h1>Contacts</h1>
+        <button id="add-btn" class="btn-primary">+ Add</button>
+        <button id="logout-btn" class="btn-ghost">Logout</button>
+      </div>
+
+      <div class="toolbar">
+        <input
+          id="search-input"
+          type="search"
+          placeholder="Search people, places, notes…"
+          autocomplete="off"
+        />
+        <span id="contact-count"></span>
+      </div>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Date</th>
+              <th>Person</th>
+              <th>Affiliation</th>
+              <th>Met where</th>
+              <th>Email</th>
+              <th>Contact</th>
+              <th>Notes</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody id="contacts-tbody"></tbody>
+        </table>
+      </div>
+
+      <div id="status-bar"></div>
+    </div>
+
+    <!-- ── Modal ────────────────────────────────────────────── -->
+    <div id="contact-modal">
+      <div class="modal-card">
+        <h3 id="modal-title">New Contact</h3>
+        <form id="contact-form" autocomplete="off" novalidate>
+          <div class="form-row">
+            <div class="form-group">
+              <label>Person *</label>
+              <input name="person" placeholder="Full name" />
+            </div>
+            <div class="form-group">
+              <label>Affiliation</label>
+              <input name="affiliation" placeholder="University / Institute" />
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label>Met where</label>
+              <input name="met_where" placeholder="Conference / Event / City" />
+            </div>
+            <div class="form-group">
+              <label>Email</label>
+              <input name="email" type="email" placeholder="email@example.com" />
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Other contact</label>
+            <input name="contact" placeholder="Twitter, LinkedIn, phone…" />
+          </div>
+          <div class="form-group">
+            <label>Notes</label>
+            <textarea
+              name="notes"
+              placeholder="Research interests, follow-up topics, how you met…"
+            ></textarea>
+          </div>
+          <div class="modal-actions">
+            <button type="button" id="modal-cancel" class="btn-ghost">Cancel</button>
+            <button type="submit" class="btn-primary">Save</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <script src="/assets/js/admin.js"></script>
+  </body>
+</html>
