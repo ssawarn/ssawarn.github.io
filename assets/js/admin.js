@@ -1,6 +1,6 @@
-/* admin.js — Contact tracker for ssawarn.github.io
- * Data stored in a private GitHub Gist (never in the public repo).
- * Auth: GitHub Personal Access Token with `gist` scope.
+/* admin.js — Personal tracker for ssawarn.github.io
+ * Sections: Contacts · Food · Movies
+ * Data stored in a private GitHub Gist. Auth: PAT with `gist` scope.
  */
 (function () {
   "use strict";
@@ -8,30 +8,92 @@
   const GITHUB_API = "https://api.github.com";
   const GIST_FILENAME = "ssawarn_contacts.json";
 
+  // ── Section definitions ───────────────────────────────────────────────────
+
+  const SECTIONS = {
+    contacts: {
+      label: "Contacts",
+      icon: "👥",
+      requiredKey: "person",
+      fields: [
+        { key: "person", label: "Person *", placeholder: "Full name", span: 1 },
+        { key: "affiliation", label: "Affiliation", placeholder: "University / Institute", span: 1 },
+        { key: "met_where", label: "Met where", placeholder: "Conference / Event / City", span: 1 },
+        { key: "email", label: "Email", type: "email", placeholder: "email@example.com", span: 1 },
+        { key: "contact", label: "Other contact", placeholder: "Twitter, LinkedIn, phone…", span: 2 },
+        { key: "notes", label: "Notes", type: "textarea", placeholder: "Research interests, follow-up topics…", span: 2 },
+      ],
+      columns: [
+        { label: "Date", key: "date_added", class: "td-date", hide: false },
+        { label: "Person", key: "person", class: "td-main bold", hide: false },
+        { label: "Affiliation", key: "affiliation", hide: true },
+        { label: "Met where", key: "met_where", hide: true },
+        { label: "Email", key: "email", isEmail: true, hide: false },
+        { label: "Contact", key: "contact", hide: true },
+        { label: "Notes", key: "notes", class: "td-notes", truncate: 60, hide: true },
+      ],
+    },
+    food: {
+      label: "Food",
+      icon: "🍜",
+      requiredKey: "dish",
+      fields: [
+        { key: "dish", label: "Dish / Meal *", placeholder: "What did you eat?", span: 2 },
+        { key: "where", label: "Where", placeholder: "Restaurant / City / Occasion", span: 1 },
+        { key: "rating", label: "Rating", placeholder: "1–5 ⭐", span: 1 },
+        { key: "notes", label: "Notes", type: "textarea", placeholder: "How was it? Would you go back?", span: 2 },
+      ],
+      columns: [
+        { label: "Date", key: "date_added", class: "td-date", hide: false },
+        { label: "Dish / Meal", key: "dish", class: "td-main bold", hide: false },
+        { label: "Where", key: "where", hide: false },
+        { label: "Rating", key: "rating", hide: false },
+        { label: "Notes", key: "notes", class: "td-notes", truncate: 60, hide: true },
+      ],
+    },
+    movies: {
+      label: "Movies",
+      icon: "🎬",
+      requiredKey: "title",
+      fields: [
+        { key: "title", label: "Title *", placeholder: "Movie / Show title", span: 2 },
+        { key: "where", label: "Where watched", placeholder: "Cinema / Netflix / Amazon…", span: 1 },
+        { key: "rating", label: "Rating", placeholder: "1–5 ⭐", span: 1 },
+        { key: "notes", label: "Notes", type: "textarea", placeholder: "Thoughts, review, recommend?", span: 2 },
+      ],
+      columns: [
+        { label: "Date", key: "date_added", class: "td-date", hide: false },
+        { label: "Title", key: "title", class: "td-main bold", hide: false },
+        { label: "Where", key: "where", hide: false },
+        { label: "Rating", key: "rating", hide: false },
+        { label: "Notes", key: "notes", class: "td-notes", truncate: 60, hide: true },
+      ],
+    },
+  };
+
+  // ── State ─────────────────────────────────────────────────────────────────
+
   let token = "";
   let gistId = "";
-  let contacts = [];
+  let data = { contacts: [], food: [], movies: [] };
+  let currentSection = "contacts";
   let editingId = null;
 
-  // ── Init ─────────────────────────────────────────────────────────────────
+  // ── Init ──────────────────────────────────────────────────────────────────
 
   window.addEventListener("DOMContentLoaded", function () {
-    // Restore session if available
-    const savedToken = localStorage.getItem("ct_token");
-    const savedGist = localStorage.getItem("ct_gist");
+    var savedToken = localStorage.getItem("ct_token");
+    var savedGist = localStorage.getItem("ct_gist");
     if (savedToken && savedGist) {
       token = savedToken;
       gistId = savedGist;
       loadAndShow();
     }
 
-    // Login
     document.getElementById("login-btn").addEventListener("click", login);
     document.getElementById("pat-input").addEventListener("keydown", function (e) {
       if (e.key === "Enter") login();
     });
-
-    // Admin panel
     document.getElementById("logout-btn").addEventListener("click", logout);
     document.getElementById("add-btn").addEventListener("click", function () {
       openModal(null);
@@ -39,19 +101,24 @@
     document.getElementById("search-input").addEventListener("input", function (e) {
       renderTable(e.target.value);
     });
-
-    // Modal
-    document.getElementById("contact-form").addEventListener("submit", saveContact);
+    document.getElementById("record-form").addEventListener("submit", saveRecord);
     document.getElementById("modal-cancel").addEventListener("click", closeModal);
-    document.getElementById("contact-modal").addEventListener("click", function (e) {
-      if (e.target === document.getElementById("contact-modal")) closeModal();
+    document.getElementById("record-modal").addEventListener("click", function (e) {
+      if (e.target === document.getElementById("record-modal")) closeModal();
     });
     document.addEventListener("keydown", function (e) {
       if (e.key === "Escape") closeModal();
     });
+
+    // Tab buttons
+    document.querySelectorAll(".tab-btn").forEach(function (btn) {
+      btn.addEventListener("click", function () {
+        switchSection(btn.dataset.section);
+      });
+    });
   });
 
-  // ── Auth ─────────────────────────────────────────────────────────────────
+  // ── Auth ──────────────────────────────────────────────────────────────────
 
   async function login() {
     var input = document.getElementById("pat-input");
@@ -72,10 +139,9 @@
 
       if (found) {
         gistId = found.id;
-        await loadContacts();
+        await loadData();
       } else {
         await createGist();
-        contacts = [];
       }
 
       localStorage.setItem("ct_token", token);
@@ -91,10 +157,9 @@
 
   async function loadAndShow() {
     try {
-      await loadContacts();
+      await loadData();
       showAdmin();
     } catch (e) {
-      // Session expired — back to login
       localStorage.removeItem("ct_token");
       localStorage.removeItem("ct_gist");
       token = "";
@@ -107,7 +172,7 @@
     localStorage.removeItem("ct_gist");
     token = "";
     gistId = "";
-    contacts = [];
+    data = { contacts: [], food: [], movies: [] };
     document.getElementById("login-screen").style.display = "";
     document.getElementById("admin-panel").style.display = "none";
     document.getElementById("pat-input").value = "";
@@ -137,38 +202,42 @@
     var resp = await ghFetch("/gists", {
       method: "POST",
       body: JSON.stringify({
-        description: "Private contacts — ssawarn.github.io",
+        description: "Private tracker — ssawarn.github.io",
         public: false,
         files: {
           [GIST_FILENAME]: {
-            content: JSON.stringify({ contacts: [] }, null, 2),
+            content: JSON.stringify({ contacts: [], food: [], movies: [] }, null, 2),
           },
         },
       }),
     });
     if (!resp.ok) throw new Error("create_failed");
-    var data = await resp.json();
-    gistId = data.id;
+    var d = await resp.json();
+    gistId = d.id;
+    data = { contacts: [], food: [], movies: [] };
   }
 
-  async function loadContacts() {
+  async function loadData() {
     var resp = await ghFetch("/gists/" + gistId);
     if (!resp.ok) throw new Error("load_failed");
-    var data = await resp.json();
-    var raw = data.files[GIST_FILENAME].content;
-    contacts = JSON.parse(raw).contacts || [];
+    var d = await resp.json();
+    var raw = d.files[GIST_FILENAME].content;
+    var parsed = JSON.parse(raw);
+    data = {
+      contacts: parsed.contacts || [],
+      food: parsed.food || [],
+      movies: parsed.movies || [],
+    };
   }
 
-  async function persistContacts() {
+  async function persistData() {
     showStatus("Saving\u2026", "info");
     try {
       var resp = await ghFetch("/gists/" + gistId, {
         method: "PATCH",
         body: JSON.stringify({
           files: {
-            [GIST_FILENAME]: {
-              content: JSON.stringify({ contacts: contacts }, null, 2),
-            },
+            [GIST_FILENAME]: { content: JSON.stringify(data, null, 2) },
           },
         }),
       });
@@ -190,134 +259,196 @@
   }
 
   function getFormData() {
-    var form = document.getElementById("contact-form");
-    return {
-      person: form.elements["person"].value.trim(),
-      affiliation: form.elements["affiliation"].value.trim(),
-      met_where: form.elements["met_where"].value.trim(),
-      email: form.elements["email"].value.trim(),
-      contact: form.elements["contact"].value.trim(),
-      notes: form.elements["notes"].value.trim(),
-    };
+    var form = document.getElementById("record-form");
+    var cfg = SECTIONS[currentSection];
+    var result = {};
+    cfg.fields.forEach(function (f) {
+      var el = form.elements[f.key];
+      if (el) result[f.key] = el.value.trim();
+    });
+    return result;
   }
 
-  function saveContact(e) {
+  function saveRecord(e) {
     e.preventDefault();
-    var data = getFormData();
-    if (!data.person) {
-      alert("Person name is required.");
+    var d = getFormData();
+    var req = SECTIONS[currentSection].requiredKey;
+    if (!d[req]) {
+      alert(req.charAt(0).toUpperCase() + req.slice(1) + " is required.");
       return;
     }
+    var arr = data[currentSection];
     if (editingId) {
-      var idx = contacts.findIndex(function (c) {
-        return c.id === editingId;
+      var idx = arr.findIndex(function (r) {
+        return r.id === editingId;
       });
-      if (idx >= 0) contacts[idx] = Object.assign({}, contacts[idx], data);
+      if (idx >= 0) arr[idx] = Object.assign({}, arr[idx], d);
     } else {
-      contacts.unshift(Object.assign({ id: genId(), date_added: todayStr() }, data));
+      arr.unshift(Object.assign({ id: genId(), date_added: todayStr() }, d));
     }
     closeModal();
     renderTable(document.getElementById("search-input").value);
-    persistContacts();
+    persistData();
   }
 
-  function deleteRow(id) {
-    var c = contacts.find(function (x) {
+  function deleteRecord(id) {
+    var arr = data[currentSection];
+    var r = arr.find(function (x) {
       return x.id === id;
     });
-    if (!c) return;
-    if (!confirm('Delete contact "' + c.person + '"?')) return;
-    contacts = contacts.filter(function (x) {
+    if (!r) return;
+    var label = r[SECTIONS[currentSection].requiredKey] || "this entry";
+    if (!confirm('Delete "' + label + '"?')) return;
+    data[currentSection] = arr.filter(function (x) {
       return x.id !== id;
     });
     renderTable(document.getElementById("search-input").value);
-    persistContacts();
+    persistData();
   }
 
   // ── Modal ─────────────────────────────────────────────────────────────────
 
+  function buildForm() {
+    var cfg = SECTIONS[currentSection];
+    var form = document.getElementById("record-form");
+    // Remove old fields (keep submit row)
+    var submitRow = form.querySelector(".modal-actions");
+    form.innerHTML = "";
+    form.appendChild(submitRow);
+
+    cfg.fields.forEach(function (f) {
+      var group = document.createElement("div");
+      group.className = "form-group" + (f.span === 2 ? " span-2" : "");
+
+      var label = document.createElement("label");
+      label.textContent = f.label;
+      group.appendChild(label);
+
+      var input;
+      if (f.type === "textarea") {
+        input = document.createElement("textarea");
+        input.name = f.key;
+        input.placeholder = f.placeholder || "";
+      } else {
+        input = document.createElement("input");
+        input.type = f.type || "text";
+        input.name = f.key;
+        input.placeholder = f.placeholder || "";
+      }
+      group.appendChild(input);
+      form.insertBefore(group, submitRow);
+    });
+  }
+
   function openModal(id) {
     editingId = id;
-    var form = document.getElementById("contact-form");
-    form.reset();
+    buildForm();
+    var cfg = SECTIONS[currentSection];
+
     if (id) {
-      var c = contacts.find(function (x) {
+      var r = data[currentSection].find(function (x) {
         return x.id === id;
       });
-      if (!c) return;
-      ["person", "affiliation", "met_where", "email", "contact", "notes"].forEach(function (f) {
-        if (form.elements[f]) form.elements[f].value = c[f] || "";
+      if (!r) return;
+      cfg.fields.forEach(function (f) {
+        var el = document.getElementById("record-form").elements[f.key];
+        if (el) el.value = r[f.key] || "";
       });
-      document.getElementById("modal-title").textContent = "Edit Contact";
+      document.getElementById("modal-title").textContent = "Edit " + cfg.label.slice(0, -1 * 0 || cfg.label.length);
     } else {
-      document.getElementById("modal-title").textContent = "New Contact";
+      document.getElementById("modal-title").textContent = "Add to " + cfg.label;
     }
-    document.getElementById("contact-modal").style.display = "flex";
+
+    document.getElementById("record-modal").style.display = "flex";
     setTimeout(function () {
-      form.elements["person"].focus();
+      var first = document.getElementById("record-form").querySelector("input, textarea");
+      if (first) first.focus();
     }, 50);
   }
 
   function closeModal() {
-    document.getElementById("contact-modal").style.display = "none";
+    document.getElementById("record-modal").style.display = "none";
     editingId = null;
   }
 
-  // ── Render table ──────────────────────────────────────────────────────────
+  // ── Tabs & Rendering ──────────────────────────────────────────────────────
+
+  function switchSection(name) {
+    if (!SECTIONS[name]) return;
+    currentSection = name;
+    document.getElementById("search-input").value = "";
+
+    // Update tab styles
+    document.querySelectorAll(".tab-btn").forEach(function (btn) {
+      btn.classList.toggle("active", btn.dataset.section === name);
+    });
+
+    renderTableHeader();
+    renderTable();
+  }
+
+  function renderTableHeader() {
+    var cols = SECTIONS[currentSection].columns;
+    var thead = document.getElementById("table-head");
+    thead.innerHTML =
+      "<tr>" +
+      cols
+        .map(function (c) {
+          return '<th class="' + (c.hide ? "col-hide" : "") + '">' + c.label + "</th>";
+        })
+        .join("") +
+      "<th></th></tr>";
+  }
 
   function renderTable(filter) {
     var q = (filter || "").toLowerCase();
-    var rows = contacts.filter(function (c) {
+    var arr = data[currentSection];
+    var cols = SECTIONS[currentSection].columns;
+
+    var rows = arr.filter(function (r) {
       return (
         !q ||
-        Object.values(c).some(function (v) {
+        Object.values(r).some(function (v) {
           return String(v).toLowerCase().includes(q);
         })
       );
     });
 
-    var tbody = document.getElementById("contacts-tbody");
+    var tbody = document.getElementById("table-body");
 
     if (rows.length === 0) {
-      tbody.innerHTML =
-        '<tr><td colspan="8" class="empty-msg">' +
-        (contacts.length === 0 ? "No contacts yet. Add your first one!" : "No results for &ldquo;" + esc(filter) + "&rdquo;.") +
-        "</td></tr>";
+      var msg = arr.length === 0 ? "Nothing here yet. Add your first entry!" : "No results for \u201c" + esc(filter) + "\u201d.";
+      tbody.innerHTML = '<tr><td colspan="' + (cols.length + 1) + '" class="empty-msg">' + msg + "</td></tr>";
     } else {
       tbody.innerHTML = rows
-        .map(function (c) {
-          var emailCell = c.email ? '<a href="mailto:' + esc(c.email) + '">' + esc(c.email) + "</a>" : "";
-          var notes = c.notes ? esc(c.notes.slice(0, 60)) + (c.notes.length > 60 ? "\u2026" : "") : "";
+        .map(function (r) {
+          var cells = cols
+            .map(function (c) {
+              var val = r[c.key] || "";
+              var display = "";
+              if (c.isEmail && val) {
+                display = '<a href="mailto:' + esc(val) + '">' + esc(val) + "</a>";
+              } else if (c.truncate && val.length > c.truncate) {
+                display = esc(val.slice(0, c.truncate)) + "\u2026";
+              } else {
+                display = esc(val);
+              }
+              if (c.class && c.class.includes("bold")) display = "<strong>" + display + "</strong>";
+              var tdClass = (c.class || "").replace(" bold", "") + (c.hide ? " col-hide" : "");
+              return '<td class="' + tdClass.trim() + '">' + display + "</td>";
+            })
+            .join("");
+
           return (
             "<tr>" +
-            '<td class="td-date">' +
-            esc(c.date_added || "") +
-            "</td>" +
-            '<td class="td-main"><strong>' +
-            esc(c.person || "") +
-            "</strong></td>" +
-            "<td>" +
-            esc(c.affiliation || "") +
-            "</td>" +
-            "<td>" +
-            esc(c.met_where || "") +
-            "</td>" +
-            "<td>" +
-            emailCell +
-            "</td>" +
-            "<td>" +
-            esc(c.contact || "") +
-            "</td>" +
-            '<td class="td-notes">' +
-            notes +
-            "</td>" +
+            cells +
             '<td class="td-actions">' +
-            '<button class="btn-edit" onclick="adminEditRow(\'' +
-            c.id +
-            "')\">Edit</button>" +
-            '<button class="btn-del" onclick="adminDeleteRow(\'' +
-            c.id +
-            "')\">Del</button>" +
+            '<button class="btn-edit" onclick="adminEdit(\'' +
+            r.id +
+            "')\">\u270E</button>" +
+            '<button class="btn-del" onclick="adminDelete(\'' +
+            r.id +
+            "')\">&#x2715;</button>" +
             "</td>" +
             "</tr>"
           );
@@ -325,15 +456,15 @@
         .join("");
     }
 
-    document.getElementById("contact-count").textContent = rows.length + " of " + contacts.length + " contact" + (contacts.length !== 1 ? "s" : "");
+    document.getElementById("record-count").textContent = rows.length + " of " + arr.length + " entr" + (arr.length !== 1 ? "ies" : "y");
   }
 
-  // ── UI helpers ────────────────────────────────────────────────────────────
+  // ── UI Helpers ────────────────────────────────────────────────────────────
 
   function showAdmin() {
     document.getElementById("login-screen").style.display = "none";
     document.getElementById("admin-panel").style.display = "";
-    renderTable();
+    switchSection("contacts");
   }
 
   function showLoginError(msg) {
@@ -360,6 +491,6 @@
   }
 
   // ── Expose to inline onclick handlers ────────────────────────────────────
-  window.adminEditRow = openModal;
-  window.adminDeleteRow = deleteRow;
+  window.adminEdit = openModal;
+  window.adminDelete = deleteRecord;
 })();

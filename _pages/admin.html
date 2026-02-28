@@ -24,7 +24,6 @@ sitemap: false
       :root {
         --bg: #0d1117;
         --surface: #161b22;
-        --surface2: #1c2128;
         --border: #30363d;
         --text: #c9d1d9;
         --muted: #8b949e;
@@ -41,7 +40,7 @@ sitemap: false
         line-height: 1.5;
       }
 
-      /* ── Login ─────────────────────────────────────────────── */
+      /* ── Login ─────────────────────────────────────── */
       #login-screen {
         min-height: 100vh;
         display: flex;
@@ -164,11 +163,11 @@ sitemap: false
         font-size: 11px;
       }
 
-      /* ── Admin panel ────────────────────────────────────────── */
+      /* ── Admin panel ───────────────────────────────── */
       #admin-panel {
         max-width: 1200px;
         margin: 0 auto;
-        padding: 1.5rem 1.25rem 3rem;
+        padding: 1.25rem 1.25rem 3rem;
       }
 
       .admin-header {
@@ -176,16 +175,50 @@ sitemap: false
         align-items: center;
         gap: 0.75rem;
         margin-bottom: 1.25rem;
-        flex-wrap: wrap;
       }
 
       .admin-header h1 {
-        font-size: 1.15rem;
+        font-size: 1.1rem;
         font-weight: 600;
         flex: 1;
-        min-width: 80px;
+        color: var(--muted);
+        letter-spacing: 0.07em;
+        text-transform: uppercase;
       }
 
+      /* ── Tabs ──────────────────────────────────────── */
+      .tab-nav {
+        display: flex;
+        gap: 0.25rem;
+        border-bottom: 1px solid var(--border);
+        margin-bottom: 1.25rem;
+      }
+
+      .tab-btn {
+        background: transparent;
+        border: none;
+        border-bottom: 2px solid transparent;
+        padding: 0.6rem 1rem;
+        font-size: 14px;
+        font-weight: 500;
+        color: var(--muted);
+        cursor: pointer;
+        transition:
+          color 0.15s,
+          border-color 0.15s;
+        margin-bottom: -1px;
+      }
+
+      .tab-btn:hover {
+        color: var(--text);
+      }
+
+      .tab-btn.active {
+        color: var(--accent);
+        border-bottom-color: var(--accent);
+      }
+
+      /* ── Toolbar ───────────────────────────────────── */
       .toolbar {
         display: flex;
         align-items: center;
@@ -202,7 +235,7 @@ sitemap: false
         padding: 0.45rem 0.9rem;
         font-size: 13px;
         outline: none;
-        width: 260px;
+        width: 240px;
         max-width: 100%;
         transition: border-color 0.15s;
       }
@@ -211,14 +244,14 @@ sitemap: false
         border-color: var(--accent);
       }
 
-      #contact-count {
+      #record-count {
         color: var(--muted);
         font-size: 13px;
         margin-left: auto;
         white-space: nowrap;
       }
 
-      /* ── Table ──────────────────────────────────────────────── */
+      /* ── Table ─────────────────────────────────────── */
       .table-wrap {
         overflow-x: auto;
         border: 1px solid var(--border);
@@ -228,7 +261,7 @@ sitemap: false
       table {
         width: 100%;
         border-collapse: collapse;
-        min-width: 680px;
+        min-width: 500px;
       }
 
       thead th {
@@ -278,10 +311,6 @@ sitemap: false
         font-variant-numeric: tabular-nums;
       }
 
-      .td-main strong {
-        font-weight: 600;
-      }
-
       .td-notes {
         color: var(--muted);
         font-size: 13px;
@@ -290,17 +319,18 @@ sitemap: false
 
       .td-actions {
         white-space: nowrap;
+        text-align: right;
       }
 
       .btn-edit,
       .btn-del {
         border-radius: 5px;
-        padding: 0.25rem 0.65rem;
-        font-size: 12px;
+        padding: 0.2rem 0.55rem;
+        font-size: 13px;
         cursor: pointer;
         background: transparent;
         transition: background 0.15s;
-        margin-right: 0.3rem;
+        margin-left: 0.25rem;
       }
 
       .btn-edit {
@@ -327,7 +357,7 @@ sitemap: false
         color: var(--muted);
       }
 
-      /* ── Status bar ─────────────────────────────────────────── */
+      /* ── Status bar ────────────────────────────────── */
       #status-bar {
         margin-top: 0.75rem;
         font-size: 12px;
@@ -343,12 +373,8 @@ sitemap: false
         color: var(--red);
       }
 
-      .status-info {
-        color: var(--muted);
-      }
-
-      /* ── Modal ──────────────────────────────────────────────── */
-      #contact-modal {
+      /* ── Modal ─────────────────────────────────────── */
+      #record-modal {
         display: none;
         position: fixed;
         inset: 0;
@@ -376,21 +402,25 @@ sitemap: false
         margin-bottom: 1.25rem;
       }
 
-      .form-row {
+      #record-form {
         display: grid;
         grid-template-columns: 1fr 1fr;
         gap: 0.75rem;
       }
 
       .form-group {
-        margin-bottom: 0.8rem;
+        display: flex;
+        flex-direction: column;
+        gap: 0.3rem;
+      }
+
+      .form-group.span-2 {
+        grid-column: span 2;
       }
 
       .form-group label {
-        display: block;
         font-size: 11px;
         color: var(--muted);
-        margin-bottom: 0.3rem;
         font-weight: 600;
         letter-spacing: 0.05em;
         text-transform: uppercase;
@@ -398,7 +428,6 @@ sitemap: false
 
       .form-group input,
       .form-group textarea {
-        width: 100%;
         background: var(--bg);
         border: 1px solid var(--border);
         border-radius: 6px;
@@ -408,6 +437,7 @@ sitemap: false
         outline: none;
         font-family: inherit;
         transition: border-color 0.15s;
+        width: 100%;
       }
 
       .form-group textarea {
@@ -421,27 +451,28 @@ sitemap: false
       }
 
       .modal-actions {
+        grid-column: span 2;
         display: flex;
         gap: 0.75rem;
         justify-content: flex-end;
-        margin-top: 1.25rem;
+        margin-top: 0.5rem;
       }
 
-      /* ── Mobile ─────────────────────────────────────────────── */
+      /* ── Mobile ────────────────────────────────────── */
       @media (max-width: 600px) {
-        .form-row {
+        #record-form {
           grid-template-columns: 1fr;
         }
 
-        /* Hide less critical columns on small screens */
-        thead th:nth-child(3),
-        thead th:nth-child(4),
-        thead th:nth-child(6),
-        thead th:nth-child(7),
-        tbody td:nth-child(3),
-        tbody td:nth-child(4),
-        tbody td:nth-child(6),
-        tbody td:nth-child(7) {
+        .form-group.span-2 {
+          grid-column: span 1;
+        }
+
+        .modal-actions {
+          grid-column: span 1;
+        }
+
+        .col-hide {
           display: none;
         }
 
@@ -449,14 +480,14 @@ sitemap: false
           width: 100%;
         }
 
-        #contact-count {
+        #record-count {
           margin-left: 0;
         }
       }
     </style>
   </head>
   <body>
-    <!-- ── Login ─────────────────────────────────────────────── -->
+    <!-- ── Login ───────────────────────────────────── -->
     <div id="login-screen">
       <div class="login-card">
         <h2>Internal</h2>
@@ -466,78 +497,49 @@ sitemap: false
         <div class="login-hint">
           Requires a
           <a href="https://github.com/settings/tokens/new?scopes=gist&description=ssawarn-contacts" target="_blank" rel="noopener">GitHub token</a>
-          with <code>gist</code> scope. Data is stored in a private Gist — never in the public repo.
+          with <code>gist</code> scope.
         </div>
       </div>
     </div>
 
-    <!-- ── Admin panel ──────────────────────────────────────── -->
+    <!-- ── Admin panel ─────────────────────────────── -->
     <div id="admin-panel" style="display: none">
       <div class="admin-header">
-        <h1>Contacts</h1>
-        <button id="add-btn" class="btn-primary">+ Add</button>
+        <h1>Internal</h1>
         <button id="logout-btn" class="btn-ghost">Logout</button>
       </div>
 
+      <!-- Tabs -->
+      <nav class="tab-nav">
+        <button class="tab-btn active" data-section="contacts">👥 Contacts</button>
+        <button class="tab-btn" data-section="food">🍜 Food</button>
+        <button class="tab-btn" data-section="movies">🎬 Movies</button>
+      </nav>
+
+      <!-- Toolbar -->
       <div class="toolbar">
-        <input id="search-input" type="search" placeholder="Search people, places, notes…" autocomplete="off" />
-        <span id="contact-count"></span>
+        <input id="search-input" type="search" placeholder="Search…" autocomplete="off" />
+        <span id="record-count"></span>
+        <button id="add-btn" class="btn-primary">+ Add</button>
       </div>
 
+      <!-- Table -->
       <div class="table-wrap">
         <table>
-          <thead>
-            <tr>
-              <th>Date</th>
-              <th>Person</th>
-              <th>Affiliation</th>
-              <th>Met where</th>
-              <th>Email</th>
-              <th>Contact</th>
-              <th>Notes</th>
-              <th></th>
-            </tr>
-          </thead>
-          <tbody id="contacts-tbody"></tbody>
+          <thead id="table-head"></thead>
+          <tbody id="table-body"></tbody>
         </table>
       </div>
 
       <div id="status-bar"></div>
     </div>
 
-    <!-- ── Modal ────────────────────────────────────────────── -->
-    <div id="contact-modal">
+    <!-- ── Modal ───────────────────────────────────── -->
+    <div id="record-modal">
       <div class="modal-card">
-        <h3 id="modal-title">New Contact</h3>
-        <form id="contact-form" autocomplete="off" novalidate>
-          <div class="form-row">
-            <div class="form-group">
-              <label>Person *</label>
-              <input name="person" placeholder="Full name" />
-            </div>
-            <div class="form-group">
-              <label>Affiliation</label>
-              <input name="affiliation" placeholder="University / Institute" />
-            </div>
-          </div>
-          <div class="form-row">
-            <div class="form-group">
-              <label>Met where</label>
-              <input name="met_where" placeholder="Conference / Event / City" />
-            </div>
-            <div class="form-group">
-              <label>Email</label>
-              <input name="email" type="email" placeholder="email@example.com" />
-            </div>
-          </div>
-          <div class="form-group">
-            <label>Other contact</label>
-            <input name="contact" placeholder="Twitter, LinkedIn, phone…" />
-          </div>
-          <div class="form-group">
-            <label>Notes</label>
-            <textarea name="notes" placeholder="Research interests, follow-up topics, how you met…"></textarea>
-          </div>
+        <h3 id="modal-title"></h3>
+        <form id="record-form" autocomplete="off" novalidate>
+          <!-- Fields injected by JS per section -->
           <div class="modal-actions">
             <button type="button" id="modal-cancel" class="btn-ghost">Cancel</button>
             <button type="submit" class="btn-primary">Save</button>
