@@ -123,7 +123,9 @@ sitemap: false
         padding: 0.45rem 0.9rem;
         font-size: 13px;
         cursor: pointer;
-        transition: color 0.15s, border-color 0.15s;
+        transition:
+          color 0.15s,
+          border-color 0.15s;
       }
 
       .btn-ghost:hover {
@@ -458,25 +460,13 @@ sitemap: false
     <div id="login-screen">
       <div class="login-card">
         <h2>Internal</h2>
-        <input
-          type="password"
-          id="pat-input"
-          placeholder="Access key"
-          autocomplete="current-password"
-          autofocus
-        />
+        <input type="password" id="pat-input" placeholder="Access key" autocomplete="current-password" autofocus />
         <button id="login-btn" class="btn-primary block">Enter</button>
         <div id="login-error" style="display: none"></div>
         <div class="login-hint">
           Requires a
-          <a
-            href="https://github.com/settings/tokens/new?scopes=gist&description=ssawarn-contacts"
-            target="_blank"
-            rel="noopener"
-            >GitHub token</a
-          >
-          with <code>gist</code> scope. Data is stored in a private Gist — never
-          in the public repo.
+          <a href="https://github.com/settings/tokens/new?scopes=gist&description=ssawarn-contacts" target="_blank" rel="noopener">GitHub token</a>
+          with <code>gist</code> scope. Data is stored in a private Gist — never in the public repo.
         </div>
       </div>
     </div>
@@ -490,12 +480,7 @@ sitemap: false
       </div>
 
       <div class="toolbar">
-        <input
-          id="search-input"
-          type="search"
-          placeholder="Search people, places, notes…"
-          autocomplete="off"
-        />
+        <input id="search-input" type="search" placeholder="Search people, places, notes…" autocomplete="off" />
         <span id="contact-count"></span>
       </div>
 
@@ -551,10 +536,7 @@ sitemap: false
           </div>
           <div class="form-group">
             <label>Notes</label>
-            <textarea
-              name="notes"
-              placeholder="Research interests, follow-up topics, how you met…"
-            ></textarea>
+            <textarea name="notes" placeholder="Research interests, follow-up topics, how you met…"></textarea>
           </div>
           <div class="modal-actions">
             <button type="button" id="modal-cancel" class="btn-ghost">Cancel</button>

@@ -118,16 +118,19 @@
 
   function ghFetch(path, opts) {
     opts = opts || {};
-    return fetch(GITHUB_API + path, Object.assign({}, opts, {
-      headers: Object.assign(
-        {
-          Authorization: "token " + token,
-          Accept: "application/vnd.github.v3+json",
-          "Content-Type": "application/json",
-        },
-        opts.headers || {}
-      ),
-    }));
+    return fetch(
+      GITHUB_API + path,
+      Object.assign({}, opts, {
+        headers: Object.assign(
+          {
+            Authorization: "token " + token,
+            Accept: "application/vnd.github.v3+json",
+            "Content-Type": "application/json",
+          },
+          opts.headers || {}
+        ),
+      })
+    );
   }
 
   async function createGist() {
@@ -170,10 +173,7 @@
         }),
       });
       if (!resp.ok) throw new Error("save_failed");
-      showStatus(
-        "Saved \u00b7 " + new Date().toLocaleTimeString(),
-        "ok"
-      );
+      showStatus("Saved \u00b7 " + new Date().toLocaleTimeString(), "ok");
     } catch (e) {
       showStatus("Save failed \u2014 check connection.", "error");
     }
@@ -222,10 +222,14 @@
   }
 
   function deleteRow(id) {
-    var c = contacts.find(function (x) { return x.id === id; });
+    var c = contacts.find(function (x) {
+      return x.id === id;
+    });
     if (!c) return;
     if (!confirm('Delete contact "' + c.person + '"?')) return;
-    contacts = contacts.filter(function (x) { return x.id !== id; });
+    contacts = contacts.filter(function (x) {
+      return x.id !== id;
+    });
     renderTable(document.getElementById("search-input").value);
     persistContacts();
   }
@@ -237,7 +241,9 @@
     var form = document.getElementById("contact-form");
     form.reset();
     if (id) {
-      var c = contacts.find(function (x) { return x.id === id; });
+      var c = contacts.find(function (x) {
+        return x.id === id;
+      });
       if (!c) return;
       ["person", "affiliation", "met_where", "email", "contact", "notes"].forEach(function (f) {
         if (form.elements[f]) form.elements[f].value = c[f] || "";
@@ -280,24 +286,38 @@
     } else {
       tbody.innerHTML = rows
         .map(function (c) {
-          var emailCell = c.email
-            ? '<a href="mailto:' + esc(c.email) + '">' + esc(c.email) + "</a>"
-            : "";
-          var notes = c.notes
-            ? esc(c.notes.slice(0, 60)) + (c.notes.length > 60 ? "\u2026" : "")
-            : "";
+          var emailCell = c.email ? '<a href="mailto:' + esc(c.email) + '">' + esc(c.email) + "</a>" : "";
+          var notes = c.notes ? esc(c.notes.slice(0, 60)) + (c.notes.length > 60 ? "\u2026" : "") : "";
           return (
             "<tr>" +
-            '<td class="td-date">' + esc(c.date_added || "") + "</td>" +
-            '<td class="td-main"><strong>' + esc(c.person || "") + "</strong></td>" +
-            "<td>" + esc(c.affiliation || "") + "</td>" +
-            "<td>" + esc(c.met_where || "") + "</td>" +
-            "<td>" + emailCell + "</td>" +
-            "<td>" + esc(c.contact || "") + "</td>" +
-            '<td class="td-notes">' + notes + "</td>" +
+            '<td class="td-date">' +
+            esc(c.date_added || "") +
+            "</td>" +
+            '<td class="td-main"><strong>' +
+            esc(c.person || "") +
+            "</strong></td>" +
+            "<td>" +
+            esc(c.affiliation || "") +
+            "</td>" +
+            "<td>" +
+            esc(c.met_where || "") +
+            "</td>" +
+            "<td>" +
+            emailCell +
+            "</td>" +
+            "<td>" +
+            esc(c.contact || "") +
+            "</td>" +
+            '<td class="td-notes">' +
+            notes +
+            "</td>" +
             '<td class="td-actions">' +
-            '<button class="btn-edit" onclick="adminEditRow(\'' + c.id + '\')">Edit</button>' +
-            '<button class="btn-del" onclick="adminDeleteRow(\'' + c.id + '\')">Del</button>' +
+            '<button class="btn-edit" onclick="adminEditRow(\'' +
+            c.id +
+            "')\">Edit</button>" +
+            '<button class="btn-del" onclick="adminDeleteRow(\'' +
+            c.id +
+            "')\">Del</button>" +
             "</td>" +
             "</tr>"
           );
@@ -305,8 +325,7 @@
         .join("");
     }
 
-    document.getElementById("contact-count").textContent =
-      rows.length + " of " + contacts.length + " contact" + (contacts.length !== 1 ? "s" : "");
+    document.getElementById("contact-count").textContent = rows.length + " of " + contacts.length + " contact" + (contacts.length !== 1 ? "s" : "");
   }
 
   // ── UI helpers ────────────────────────────────────────────────────────────
@@ -337,11 +356,7 @@
   }
 
   function esc(str) {
-    return String(str)
-      .replace(/&/g, "&amp;")
-      .replace(/</g, "&lt;")
-      .replace(/>/g, "&gt;")
-      .replace(/"/g, "&quot;");
+    return String(str).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
   }
 
   // ── Expose to inline onclick handlers ────────────────────────────────────
