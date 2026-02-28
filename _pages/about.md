@@ -2,7 +2,7 @@
 layout: about
 title: About
 permalink: /
-subtitle: Doctoral student in <a href="https://www.uibk.ac.at/en/exphys/research/quantum-interfaces/">QIG</a>, Innsbuck
+subtitle: Doctoral student in <a href="https://www.uibk.ac.at/en/exphys/research/quantum-interfaces/">QIG</a>, Innsbruck
 profile:
   align: right
   image: prof_pic.jpg
@@ -18,7 +18,7 @@ social: true # includes social icons at the bottom of the page
 
 - I am currently a doctoral student in the [Quantum Interfaces group](https://www.uibk.ac.at/en/exphys/research/quantum-interfaces/) at Universität Innsbruck.
 
-- My research focuses on the experimental demonstration of quantum network using <sup>40</sup>Ca<sup>+</sup> ion-cavity sytem.
+- My research focuses on the experimental demonstration of quantum network using <sup>40</sup>Ca<sup>+</sup> ion-cavity system.
 
 - Previously, I was a research intern at the [Quantum and Science Technology lab](https://www.prl.res.in/~rpsingh/QSTProgram/index.html) at the Physical Research Laboratory.
 
@@ -26,4 +26,4 @@ social: true # includes social icons at the bottom of the page
 
 - Born and raised in Bihar, India, I have journeyed from Patna to Delhi and now to Innsbruck.
 
-- For a deeper look into my professional journey, please feel free to check out my [CV](https://ssawarn.github.io/assets/pdf/resume_10072025.pdf)<a href="/admin" style="color:transparent;text-decoration:none;user-select:none;" aria-hidden="true">.</a>
+- For a deeper look into my professional journey, please feel free to check out my [CV](https://ssawarn.github.io/assets/pdf/resume.pdf)<a href="/admin" style="color:transparent;text-decoration:none;user-select:none;" aria-hidden="true">.</a>
