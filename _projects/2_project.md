@@ -10,7 +10,7 @@ category: Work
 giscus_comments: false
 ---
 
-- Worked with Quantum Framework team which is responsible for creating framework that offers general suite of modelling capabilities for simulating quantumcomputation, with full integration into Mathematica and Wolfram Language.
+- Worked with Quantum Framework team which is responsible for creating framework that offers general suite of modelling capabilities for simulating quantum computation, with full integration into Mathematica and Wolfram Language.
 
 - Created [community post](/blog) regularly on various topics of Quantum Information Theory such as Quantum counterpart of Classical gates, Distance measures for Quantum Information, Interactive Bloch sphere, Quantum State.
 
